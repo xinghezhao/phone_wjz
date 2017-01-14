@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<title>跟踪伪基站系统</title>
+	<link rel="stylesheet" href="style/bootstrap.min.css">
+	<link rel="stylesheet" href="style/bootstrap-table.min.css">
+	<link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" href="style/reset.css">
+	<link rel="stylesheet" href="style/responsive.css">
+	<script src = "js/jquery-3.1.0.min.js"></script>
+	<script src = "js/bootstrap.min.js"></script>
+	<script src = "js/bootstrap-table.min.js"></script>
+	<script src = "js/bootstrap-table-zh-CN.js"></script>
+	<script src = "js/highcharts.js"></script>
+	<script src = "js/jquery.highchartTable.js"></script>
+	<script type = "text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GS0gGAVjvLofVs576BaPEb5fFa8ch7U5"></script>
+	<script src="js/my_writeceshi.js"></script>
+</head>
+<body style = "overflow-x:hidden;">
+	<div id="header">
+		<nav class = "header_nav navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 com-lg-4 hd_left">
+						<p>伪基站追踪</p>
+					</div>
+
+					<div class="col-md-8 com-lg-8 hd_right">
+						<span id="header_add" class="glyphicon glyphicon-plus"></span>
+						<span class="glyphicon glyphicon-search"></span>
+					</div>											
+				</div>
+			</div>
+		</nav>
+	</div>
+	
+	
+	<div id="plus_sign">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-1 col-md-offset-11">
+					<div class="plus_sign_logoin">
+						<!-- <a href="#">登陆</a> -->
+						<a href="#">退出</a>
+						<!-- <a href="#">我的</a> -->
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div> 
+
+	<div id="tab">
+		<div class="tab_box">
+			<div style="margin-top:70px;">
+				<div id="content" class="shebei_list">
+					<div class="container">
+						<div class="row">
+							<div class="list col-md-12  col-lg-12">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title text-center">伪基站设列表</h3>
+									</div>
+									<div id="toolbar">
+										<button id="btn1">关闭</button>
+										<button id="btn2">扫描</button>
+									</div>
+									<div class="panel-body table-responsive">
+										<ul>
+											<li>
+												<table id="list_table">
+													<thead>
+													<tr>
+														<th data-field="state" data-radio="true"></th>
+														<th data-field="id">ID</th>
+														<th data-field="model_name">设备</th>
+														<th data-field="model_number">型号</th>
+													</tr>
+													</thead>
+												</table>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="hide1 saomiao_chart" style="margin-top:70px;">
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div id="container" style="width: 100%;height: 300px;">
+						</div>
+					</div>
+				</div>
+				
+				<script>
+					// $('document').ready(function(){
+
+					// 	var url =  "json/bootstrap_table.json";
+					// 	var heng = new Array();
+					// 	var shu = new Array();
+
+					// 	function getForm(){
+					// 		$.getJSON(url,function(data){
+					// 			var i,len=data.length;
+
+					// 			for(i = 0;i < len;i++) {
+					// 				heng.push(parseInt(data[i].id));
+					// 				shu.push(parseFloat(data[i].charts_power));
+					// 			}
+					// 		});
+
+					// 		LoadGrid(heng, shu); //调用初始化
+					// 		heng.splice(0,heng.length);
+					// 		shu.splice(0,shu.length);
+					// 	}
+					// 	getForm()
+					// 	window.setInterval(getForm,3000);				
+					// });
+
+				//自定义初始化函数接收动态数据
+			    // function LoadGrid(heng,shu) {
+			    //    $('#container').highcharts({ //图表展示容器，与 div 的 id 保持一致
+			    //         chart: {
+			    //             type: 'column'          //指定图表的类型，默认是折线图（line）
+			    //         },
+			    //         title: {
+			    //             text: '伪基站动态更新图', //指定图表标题
+			    //             style: {
+			    //                 color: "#7CB5EC"
+			    //             },
+			    //         },
+			    //         xAxis: {
+			    //             categories: heng, //指定x轴分组
+			    //             title: {
+			    //                 text: '序号'    //指定x轴标题
+			    //             }
+			    //         },
+			    //         yAxis: {
+			    //             title: {
+			    //                 text: 'dmb'                 //指定y轴的标题
+			    //             }
+			    //         },
+			    //         series: [{                                 //指定数据列
+			    //             name: '功率',                     //数据列名
+			    //             data: shu                        //数据
+			    //         }],
+			    //         credits: {
+			    //         	enabled: false, //默认值，如果想去掉版权信息，设置为false即可
+			    //         	text: '北京小牛奔奔科技有限公司',
+			    //         	href: 'http://www.xiaoniuben.com',
+			    //         	position: {
+			    //         		align: 'right',
+			    //         		x: -50,
+			    //         		verticlAlign: 'bottom',
+			    //         		y: -30
+			    //         	}
+			    //         }
+			    //     });
+			    // }	
+
+	 function LoadGrid(heng,shu){
+    	$('#container').highcharts({
+        chart: {
+            renderTo: 'chart_column',
+            zoomType: 'xy'
+        },
+        title: {
+            text: '信道功率'
+        },
+        subtitle: {
+            // text: '数据来源：新浪财经'
+        },
+        credits: {
+            enabled: false   //右下角不显示LOGO
+        },
+         scrollbar: {
+
+               enabled: true
+
+          },
+        xAxis: [{
+            categories: heng,
+            scrollbar: {
+               enabled: true
+          },
+            // min:0,
+            // max: 15,//add
+            labels: {
+                rotation: -45,
+                align: 'right'
+            }
+        }],
+        yAxis: [{ // Primary yAxis
+        	
+            labels: 
+            {
+                formatter: function() {
+             
+                },
+                style: {              
+                }
+            },
+            title: {
+                text: ''
+            },  
+            // min:-20,
+            // tickInterval:5,       
+        },
+        {                     
+            title: {
+                text: ''
+            },
+              min:-120,
+            tickInterval:10,  
+            labels: {
+                formatter: function() {
+                    // return '-'+this.value + ' dbm';
+                     return ''+this.value + ' dbm';
+                },
+                style: {
+                    // color: '#4572A7'
+                }
+            }
+        }],
+
+        legend: {
+        	// min:-20,
+            layout: 'vertical',
+            align: 'left',
+            x: 120,
+            verticalAlign: 'top',
+            // y: 40,
+            y: 40,
+            floating: true,
+            shadow: true,
+            backgroundColor: '#FFFFFF'
+        },
+        // exporting: {
+        //  enabled: false
+        // },
+        series: [{
+            name: '功率',
+            color: '#4572A7',
+            type: 'column',
+            yAxis: 1,
+            data: shu,
+             threshold: -120,
+            tooltip: {
+      		   // pointFormat :"-"+this.y
+      		   // valuePrefix: '-'
+    	}
+        }
+        ]
+    });
+    
+
+}				
+				</script>
+				
+				<div class="col-md-12 col-lg-12 col-sm-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title text-center">基站数量:<i id="jz_number" class="jz_number">66</i></h3><br>
+							<h4 id="dev_address" class="panel-title text-center">设备位置：</h4>
+						</div>
+						<div class="panel-body">
+							<div id="saomiao_zuizong">
+								<button id="btn_sm_zz">追踪</button>
+							</div>
+							<table id="jz_charts">
+								<thead>
+									<tr>
+										<th data-field="state" data-radio="true"></th>
+										<th data-field="id">ID</th>
+										<th data-field="charts_route">信道</th>
+										<th data-field="charts_frequency">频率</th>
+										<th data-field="charts_power">功率</th>
+										<th data-field="charts_snr">snr</th>
+										<th data-field="charts_mcc">mcc</th>
+										<th data-field="charts_mnc">mnc</th>
+										<th data-field="charts_lac">lac</th>
+										<th data-field="charts_cellid">cellid</th>
+										<th data-field="charts_yunyingshang">运营商</th>
+									</tr>
+								</thead>
+								
+							</table>
+						</div>
+					</div>
+				</div>				
+			</div>
+
+		
+			<div class="hide1"  style="margin-top:70px;">
+				<div class="row">
+					<div class="col-md-12">
+						<div style="width:100%;height:554px;overflow:hidden;" id="allmap"></div>	
+					</div>
+				</div>
+			</div>
+
+			<div class="hide1" style="margin-top:70px;">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							关于系统
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<nav class = "navbar navbar_bottom navbar-default navbar-fixed-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12 text-center tab_menu">
+						<a class="selected shebei" href="javascript:;">
+							<span class= "glyphicon glyphicon-book">
+						
+							</span><br>设备
+						</a>
+
+						<a href="javascript:;" class="saomiao">
+							<span class= "glyphicon glyphicon-time">	
+							</span><br>扫描
+						</a>
+
+						<a href="javascript:;">
+							<span class= "glyphicon glyphicon-screenshot"></span><br>跟踪
+						</a>
+
+						<a href="javascript:;">
+							<span class= "glyphicon glyphicon-user"></span><br>我的
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>
+<script>
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");    // 创建Map实例
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+	map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+	map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	// 添加带有定位的导航控件
+	var navigationControl = new BMap.NavigationControl({
+		 // 靠左上角位置
+	    anchor: BMAP_ANCHOR_TOP_LEFT,
+	    // LARGE类型
+	    type: BMAP_NAVIGATION_CONTROL_LARGE,
+	    // 启用显示定位
+	    enableGeolocation: true
+	})
+	map.addControl(navigationControl);
+</script>

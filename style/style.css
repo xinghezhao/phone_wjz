@@ -1,0 +1,183 @@
+/*头部开始*/
+#header {
+	height: auto;
+	overflow: hidden;
+	position: relative;
+}
+.header_nav:after {
+	display: block;
+	content: " ";
+	overflow: hidden;
+}
+.header_nav {
+	background: #000;
+	width: 100%;
+	min-height: 50px;
+	line-height: 50px;
+}
+
+#header .hd_left p {
+	float: left;
+	color: #fff;
+	font-size: 20px;
+}
+
+#header .hd_right span {
+	color: #fff;
+	float: right;
+	line-height: 50px;
+	margin:0 20px;
+	font-size: 20px;
+}
+
+#header #lishi_back { /*跟踪记录和扫描记录头部返回*/
+	border-right: 1px solid #666;
+	padding-right: 5px;
+	display: none;
+}
+
+#plus_sign {
+	position: absolute;	
+	margin-top: 60px;
+	z-index: 999;
+	width: 100%;
+}
+#plus_sign .plus_sign_logoin {
+	width: 150px;
+	height: auto;
+	border: 1px solid #000;
+	background: #000;
+	float: right;
+	display: none;
+}
+#plus_sign .plus_sign_logoin a {
+	display: block;
+	text-align: center;
+	border-bottom: 1px solid #fff;
+	margin:10px 0;
+	color: #fff;
+}
+
+/*头部 end*/
+
+
+
+
+/*内容区域开始*/
+#content {
+	width: 100%;
+	margin-top: 40px;
+	min-height: 50px;
+	line-height: 70px;
+}
+#content .list ul li .row {
+	padding-bottom: 10px;
+}
+#content ul li {
+	border-bottom: 1px solid #ccc;
+}
+
+#content .cont_left img {
+	float: left;
+}
+#content .cont_right p {
+	height: 40px;
+	margin-top: 30px;
+	margin-left: 75px;
+	font-size: 14px;
+}
+#content ul li img {
+	width: 60px;
+	height: 40px;
+	
+}
+/*内容区域end*/
+
+
+/*footer开始*/
+#footer {
+	width: 100%;
+	background: #FCFCFC;
+}
+#footer a {
+	display: inline-block;
+	line-height: 18px;
+	font-size: 20px;
+	margin:0 28px;
+	color: #666;
+}
+/*footer end*/
+
+/*小模态框开始*/
+#modal_content ul li {
+	border-bottom: 1px solid #ccc;
+/*	text-align:center;*/
+}
+#modal_details li a {
+	color: #666;
+}
+/*小模态框 end*/
+
+
+/*大tab开始*/
+
+.hide1{display:none;}
+
+/*表格开始*/
+i.jz_number {
+	font-style: normal;
+	background: #7CB5EC;
+	border-radius: 5px;
+	padding:5px;
+}
+
+/*表格end*/
+.selected {
+	color: #02B300 !important;
+	cursor:pointer;
+}
+/*表格 end*/
+
+/*扫描界面 开始*/
+#panel_table{
+	display: none;
+}
+
+.saomiao_form-group {
+	display: inline-block;
+}
+
+/*扫描界面 end*/
+
+
+/*地图开始*/
+#container {
+	height: 100%;
+}
+
+/*地图 end*/
+
+/*大tab end*/
+
+
+
+/*历史纪录开始*/
+#chart_map_tab {
+	margin: 20px 0;
+}
+#chart_map_tab>div>div a {
+	padding: 5px;
+	transition: 0.3s;
+	font-size: 18px;
+	box-shadow: 1px 1px 5px #337AB7;/*opera或ie9*/
+	-moz-box-shadow: 1px 1px 5px #337AB7;/*firefox*/  
+    -webkit-box-shadow: 1px 1px 5px #337AB7;/*webkit*/  
+	border-radius: 10px;
+}
+#chart_map_tab>div>div a:hover {
+	text-decoration: none;
+	background: #337AB7;
+	color: #fff;
+}
+/*历史纪录 end*/
+

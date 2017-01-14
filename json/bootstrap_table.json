@@ -1,0 +1,11 @@
+[
+	{"id":"1", "charts_route":"223","charts_frequency":"22","charts_power":"100","charts_snr":"9","charts_mcc":"8","charts_mnc":"22","charts_lac":"77","charts_cellid":"33","charts_yunyingshang":"中国移动"},
+	{"id":"2", "charts_route":"223","charts_frequency":"22","charts_power":"92","charts_snr":"9","charts_mcc":"8","charts_mnc":"22","charts_lac":"77","charts_cellid":"33","charts_yunyingshang":"中国移动"},
+	{"id":"3", "charts_route":"223","charts_frequency":"22","charts_power":"22","charts_snr":"9","charts_mcc":"8","charts_mnc":"22","charts_lac":"77","charts_cellid":"33","charts_yunyingshang":"中国移动"},
+	{"id":"4", "charts_route":"223","charts_frequency":"22","charts_power":"42","charts_snr":"9","charts_mcc":"8","charts_mnc":"22","charts_lac":"77","charts_cellid":"33","charts_yunyingshang":"中国移动"},
+	{"id":"5", "charts_route":"223","charts_frequency":"22","charts_power":"112","charts_snr":"9","charts_mcc":"8","charts_mnc":"22","charts_lac":"77","charts_cellid":"33","charts_yunyingshang":"中国移动"},
+	{"id":"6", "charts_route":"223","charts_frequency":"22","charts_power":"222","charts_snr":"9","charts_mcc":"8","charts_mnc":"22","charts_lac":"77","charts_cellid":"33","charts_yunyingshang":"中国移动"},
+	{"id":"7", "charts_route":"223","charts_frequency":"22","charts_power":"122","charts_snr":"9","charts_mcc":"8","charts_mnc":"22","charts_lac":"77","charts_cellid":"33","charts_yunyingshang":"中国移动"}
+
+]
+

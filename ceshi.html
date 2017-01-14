@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style/bootstrap.min.css">
+	<link rel="stylesheet" href="style/bootstrap-table.min.css">
+	<link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" href="style/reset.css">
+	<link rel="stylesheet" href="style/responsive.css">
+	<script src = "js/jquery-3.1.0.min.js"></script>
+	<script src = "js/bootstrap.min.js"></script>
+	<script src = "js/bootstrap-table.min.js"></script>
+	<script src = "js/bootstrap-table-zh-CN.js"></script>
+	<script src = "js/highcharts.js"></script>
+	<script src = "js/jquery.highchartTable.js"></script>
+	<script type = "text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GS0gGAVjvLofVs576BaPEb5fFa8ch7U5"></script>
+	<script src="js/my_write.js"></script>
+	
+</head>
+<body>
+<div class="row">
+	<div class="col-md-12">
+		<div id="container" style="width: 100%;height: 300px;">
+		</div>
+	</div>
+</div>
+
+<script type='text/javascript'>
+	
+	$('document').ready(function(){
+		
+		var url =  "json/bootstrap_table.json";
+		var heng = new Array();
+		var shu = new Array();
+
+		function getForm(){
+
+			$.getJSON(url,function(data){
+				var i,len=data.length;
+
+				for(i = 0;i < len;i++) {
+
+					heng.push(parseInt(data[i].charts_number));
+					shu.push(parseFloat(data[i].charts_power)); 
+				}
+			});
+			
+			LoadGrid(heng, shu); //调用初始化
+			heng.splice(0,heng.length);
+			shu.splice(0,shu.length);
+
+		}
+
+		getForm()
+		window.setInterval(getForm,3000);
+
+	});
+ 
+
+	//自定义初始化函数接收动态数据
+    function LoadGrid(heng,shu) {
+       $('#container').highcharts({ //图表展示容器，与 div 的 id 保持一致
+            chart: {
+                type: 'column'          //指定图表的类型，默认是折线图（line）
+            },
+            title: {
+                text: '伪基站动态更新图', //指定图表标题
+                style: {
+                    color: "#7CB5EC"
+                },
+            },
+            xAxis: {
+                categories: heng, //指定x轴分组
+                title: {
+                    text: '序号'    //指定x轴标题
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'dmb'                 //指定y轴的标题
+                }
+            },
+            series: [{                                 //指定数据列
+                name: '功率',                          //数据列名
+                data: shu                        //数据
+            }],
+            credits: {
+            	//enabled: true, //默认值，如果想去掉版权信息，设置为false即可
+            	text: '北京小牛奔奔科技有限公司',
+            	href: 'http://www.xiaoniuben.com',
+            	position: {
+            		align: 'right',
+            		x: -50,
+            		verticlAlign: 'bottom',
+            		y: -30
+            	}
+            }
+        });
+    }
+</script>
+
+<div class="col-md-12 col-lg-12 col-sm-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title text-center">基站数量<i class="jz_number">22</i></h3><br>
+			<h4 class="panel-title text-center">设备位置：北京市北京市通州区科创十三街附近</h4>
+		</div>
+		<div class="panel-body">
+			<table id="jz_charts"
+				data-toggle="table"
+				data-url="json/bootstrap_table.json"
+				data-method="post"
+				data-query-params="queryParams"
+				data-toolbar="#toolbar"
+				data-pagination="true"
+				data-search="true"
+				data-show-refresh="true"
+				data-show-toggle="true"
+				data-show-columns="true"
+				data-page-size="5"
+				>
+				<thead>
+					<tr>
+						<th data-field="charts_number">
+							序号
+						</th>
+						<th data-field="charts_route">信道</th>
+						<th data-field="charts_frequency">频率</th>
+						<th data-field="charts_power">功率</th>
+						<th data-field="charts_snr">snr</th>
+						<th data-field="charts_mcc">mcc</th>
+						<th data-field="charts_mnc">mnc</th>
+						<th data-field="charts_lac">lac</th>
+						<th data-field="charts_cellid">cellid</th>
+						<th data-field="charts_yunyingshang">运营商</th>
+						<th data-field="charts_operation">操作</th>
+					</tr>
+				</thead>
+				
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+</body>
+</html>

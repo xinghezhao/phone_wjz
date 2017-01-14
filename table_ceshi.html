@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试读取表格单行数据</title>
+	<link rel="stylesheet" href="ceshi css/bootstrap.css">
+	<link rel="stylesheet" href="ceshi css/bootstrap-table.css">
+
+	<script src="ceshi js/jquery.min.js"></script>
+	<script src="ceshi js/bootstrap.min.js"></script>
+	<script src="ceshi js/bootstrap-table.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>getRowByUniqueId</h1>
+        <p>
+            Get data from table, the row that contains the id passed by parameter:
+            <code>$table.bootstrapTable('getRowByUniqueId', 1);</code>
+        </p>
+        <div id="toolbar">
+            <button id="button" class="btn btn-default">getRowByUniqueId</button>
+        </div>
+        <table id="table"
+               data-toggle="table"
+               data-toolbar="#toolbar"
+               data-height="460"
+               data-unique-id="id"
+               data-click-to-select="true"
+               data-url="./json/data.json">
+            <thead>
+            <tr>
+            	<th data-field="state" data-radio="true"></th>
+                <th data-field="id">ID</th>
+                <th data-field="model_name">Item Name</th>
+                <th data-field="model_number">Item Price</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+<script>
+    var $table = $('#table'),
+        $button = $('#button');
+
+    $(function () {
+        $button.click(function () {
+
+        	var shebei_number = $table.bootstrapTable('getSelections')
+
+        	// console.log(shebei_number[0].model_number); //可以直接读取
+
+            var shebei_number = JSON.stringify($table.bootstrapTable('getSelections'))  //将JSON格式转换为字符串      
+
+            var shebei_number = eval('('+ shebei_number + ')'); //将字符串转换为JSON格式
+            
+            console.log(shebei_number[0].model_number);
+        });
+        
+
+    });
+</script>
+</body>
+</html>
